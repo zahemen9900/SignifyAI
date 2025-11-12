@@ -1,0 +1,50 @@
+@import url('https://fonts.cdnfonts.com/css/geist-sans');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/impact');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 60% 99%;
+    --foreground: 221 60% 10%;
+    --muted: 220 27% 90%;
+    --muted-foreground: 220 15% 35%;
+    --brand: 145 65% 40%;
+    --brand-foreground: 146 63% 12%;
+    --accent: 44 95% 52%;
+    --accent-foreground: 228 80% 10%;
+    --highlight: 353 88% 48%;
+    --highlight-foreground: 50 90% 94%;
+    --border: 220 13% 82%;
+    --input: 220 13% 82%;
+    --ring: 145 65% 40%;
+  }
+
+  .dark {
+    --background: 230 72% 5%;
+    --foreground: 210 40% 96%;
+    --muted: 220 20% 18%;
+    --muted-foreground: 218 14% 65%;
+    --brand: 146 62% 43%;
+    --brand-foreground: 140 67% 12%;
+    --accent: 43 96% 55%;
+    --accent-foreground: 230 75% 8%;
+    --highlight: 355 80% 60%;
+    --highlight-foreground: 47 95% 93%;
+    --border: 215 27% 24%;
+    --input: 215 27% 24%;
+    --ring: 146 62% 43%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased transition-colors duration-300 ease-out;
+    font-family: 'Geist Sans', Inter, Impact, system-ui, sans-serif;
+  }
+}

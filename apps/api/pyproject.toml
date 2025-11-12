@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "signifyai-api"
+version = "0.1.0"
+description = "FastAPI microservice for SignifyAI inference and automation"
+authors = ["SignifyAI Team <dev@signify.ai>"]
+packages = [{ include = "app" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.112.1"
+uvicorn = { version = "^0.30.5", extras = ["standard"] }
+httpx = "^0.27.0"
+python-dotenv = "^1.0.1"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.6.0"
+pytest = "^8.3.2"
+pytest-asyncio = "^0.23.8"
+
+[build-system]
+requires = ["poetry-core>=1.8.2"]
+build-backend = "poetry.core.masonry.api"

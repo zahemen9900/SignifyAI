@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+apps/web/node_modules/
 /.pnp
 .pnp.js
 
@@ -14,6 +15,17 @@
 
 # production
 /build
+apps/web/dist/
+apps/web/.turbo/
+
+# python
+apps/api/__pycache__/
+apps/api/.venv/
+apps/api/.env
+apps/api/.pytest_cache/
+
+# pnpm store
+.pnpm-store/
 
 # misc
 .DS_Store
@@ -27,6 +39,7 @@ yarn-error.log*
 # local env files
 .env*.local
 .env
+.env.example
 
 # vercel
 .vercel
