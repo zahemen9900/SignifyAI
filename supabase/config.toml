@@ -1,0 +1,5 @@
+[functions.reset-streak]
+verify_jwt = false
+
+[functions.reset-streak.schedules.hourly_reset]
+schedule = "0 * * * *"

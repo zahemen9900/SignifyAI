@@ -1,5 +1,7 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
+
+import { useAuth } from '@/state/auth-provider';
 
 const PREFERRED_THEME_KEY = 'signifyai:theme';
 
@@ -34,6 +36,7 @@ function applyDocumentTheme(theme: Theme) {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
+  const { settings, updateSettings } = useAuth();
   const [theme, setThemeState] = useState<Theme>(() => resolveInitialTheme());
 
   useEffect(() => {
@@ -41,13 +44,32 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     window.localStorage.setItem(PREFERRED_THEME_KEY, theme);
   }, [theme]);
 
+  useEffect(() => {
+    if (settings?.app_theme && settings.app_theme !== theme) {
+      setThemeState(settings.app_theme);
+    }
+  }, [settings?.app_theme, theme]);
+
+  const persistTheme = useCallback(
+    (next: Theme) => {
+      setThemeState(next);
+      if (settings?.user_id) {
+        void updateSettings({ app_theme: next });
+      }
+    },
+    [settings?.user_id, updateSettings]
+  );
+
   const value = useMemo<ThemeContextState>(
     () => ({
       theme,
-      setTheme: setThemeState,
-      toggleTheme: () => setThemeState((current) => (current === 'dark' ? 'light' : 'dark'))
+      setTheme: persistTheme,
+      toggleTheme: () => {
+        const next = theme === 'dark' ? 'light' : 'dark';
+        persistTheme(next);
+      }
     }),
-    [theme]
+    [persistTheme, theme]
   );
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
