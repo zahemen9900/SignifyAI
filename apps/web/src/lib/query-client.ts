@@ -8,7 +8,7 @@ export const queryClient = new QueryClient({
       refetchOnWindowFocus: false,
       refetchOnMount: false,
       refetchOnReconnect: false,
-      keepPreviousData: true,
+      placeholderData: (previousData) => previousData,
       retry: 1
     }
   }
